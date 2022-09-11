@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Project.Extensions;
+using Project.AProcesses;
+
 namespace Project.Models
 {
     static class LoginPage
     {
-        static string UserPath = "C:\\Users\\asus\\OneDrive\\Desktop\\Code Academy\\Console Project\\Project\\Project\\Files\\Users.json";
-        static internal void FirstMenu(out int choise)
+       static internal void FirstMenu(out int choise)
         {
             choise = -1;
 
@@ -25,20 +26,16 @@ namespace Project.Models
         static internal User Login()
         {
         LoginLabel:
+            Console.Clear();
             User u = null;
             int choise = -1;
-            Console.Write("Username: ");
-            string Username = Console.ReadLine();
-            Console.Write("Password: ");
-            string Password = Console.ReadLine();
+            Console.Write("Username: ");    string Username = Console.ReadLine();
+            Console.Write("Password: ");    string Password = Console.ReadLine();
 
-            if (Authentication.AuthUser(Username, Password)) //Validation.PasswordValidation(Password) && Validation.NameValidation(Username) && 
+            if (Authentication.AuthUser(Username, Password))
             {
                 List<User> users = new List<User>();
-                using (StreamReader sr = new StreamReader(UserPath))
-                {
-                    users = JsonConvert.DeserializeObject<List<User>>(sr.ReadToEnd());
-                }
+                users = UserAndJson.ReadFromJson();
                 u = AdditionalProcesses.FindUser(users, Username);
                 Console.WriteLine($"Welcome, {u.Name} {u.Surname}");
             }
@@ -63,56 +60,34 @@ namespace Project.Models
 
         static internal User Register()
         {
-            List<User> users = new List<User>();
-            using (StreamReader sr = new StreamReader(UserPath))
-            {
-                users = JsonConvert.DeserializeObject<List<User>>(sr.ReadToEnd());
-            }
-            //File.Create("C:\\Users\\asus\\OneDrive\\Desktop\\Code Academy\\Console Project\\Project\\Project\\Files\\Users.json").Close();
-            string Name = "";
-            string Surname = "";
-            string Username = "";
-            string Password = "";
+            List<User> users = UserAndJson.ReadFromJson();
+            string Name = "", Surname = "", Username = "", Password = "";
             while (!Validation.UsernameValidation(Username))
             {
-                Console.Clear();
                 Console.Write("Username: ");
                 Username = Console.ReadLine();
             }
             while (!Validation.PasswordValidation(Password))
             {
-                Console.Clear();
                 Console.Write("Password: ");
                 Password = Console.ReadLine();
             }
             while (!Validation.NameValidation(Name))
             {
-                Console.Clear();
                 Console.Write("Name: ");
                 Name = Console.ReadLine();
             }
             while (!Validation.NameValidation(Surname))
             {
-                Console.Clear();
                 Console.Write("Surname: ");
                 Surname = Console.ReadLine();
             }
 
             User u = new User(Username, Password, Name, Surname);
-            users.Add(u);
-
-            using (StreamWriter sw = new StreamWriter("C:\\Users\\asus\\OneDrive\\Desktop\\Code Academy\\Console Project\\Project\\Project\\Files\\Users.json"))
-            {
-                sw.Write(JsonConvert.SerializeObject(users));
-            }
+            UserAndJson.AddToJson(u);
 
             Console.WriteLine($"Welcome, {u.Name} {u.Surname}");
             return u;
         }
-
-
-
-
-
     }
 }

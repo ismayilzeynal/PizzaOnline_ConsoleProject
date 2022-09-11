@@ -37,5 +37,10 @@ namespace Project.Extensions
             user = null;
             return user;
         }
+
+        public static void Exit()
+        {
+            Environment.Exit(0);
+        }
     }
 }

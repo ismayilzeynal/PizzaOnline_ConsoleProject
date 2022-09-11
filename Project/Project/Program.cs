@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Project.AProcesses;
 using Project.Exceptions;
 using Project.Extensions;
 using Project.Models;
@@ -13,32 +14,31 @@ namespace Project
         static void Main(string[] args)
         {
             int choise;
-            User u;
+            User u=null;
             
             LoginPage.FirstMenu(out choise);
             if (choise == 2)
-                LoginPage.Register();
+                u = LoginPage.Register();
             else if (choise == 1)
-                LoginPage.Login();
+                u = LoginPage.Login();
             else if (choise == 0)
-                goto ExitLabel;
+                AdditionalProcesses.Exit();
             else
-                throw new AbnormalValueException();  
+                throw new AbnormalValueException();
 
-
+            MainMenu.Menu(u);
             
 
 
 
-
-
+            
 
 
 
 
             /*-------------------------------------------------------------------------*/
-            ExitLabel:
-            AdditionalProcesses.End();
+            //ExitLabel:
+            //AdditionalProcesses.End();
         }
 
     }

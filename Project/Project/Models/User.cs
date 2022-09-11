@@ -27,7 +27,7 @@ namespace Project.Models
         private string _surname;
 
         //props
-        public int Id { get; }
+        public int Id { get; set; }
         public bool IsAdmin { get => _isAdmin; set { _isAdmin = value; } }
         public string Username
         {

@@ -36,5 +36,16 @@ namespace Project.Extensions
             return false;
         }
 
+
+        public static bool IsContactNumber(string str)
+        {
+            foreach (char ch in str)
+            {
+                if (!((ch > 47 && ch < 58) || ch == '+'|| ch== ' '))
+                    return false;
+            }
+            return true;
+        }
+
     }
 }
