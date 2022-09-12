@@ -69,9 +69,12 @@ namespace Project.Models
                     _surname = value;
             }
         }
+        public void Print()
+        {
+            Console.WriteLine($"- {Id}.  \nName: {Name} \nUsername: {Username} \nIs admin: {IsAdmin}");
+        }
 
-        
-        
-            
+
+
     }
 }

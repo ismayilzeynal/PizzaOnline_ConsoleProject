@@ -54,5 +54,15 @@ namespace Project.Models
             }
         }
 
+        public void Print()
+        {
+            Console.WriteLine($"- {Id}.  \nName: {Name} \nPrice: {Price}");
+            Console.WriteLine("Ingridients: ");
+            foreach (string ingr in Ingridients)
+            {
+                Console.WriteLine($"   - {ingr}");
+            }
+        }
+        
     }
 }

@@ -12,7 +12,7 @@ namespace Project.AProcesses
         static string UserPath = "C:\\Users\\asus\\OneDrive\\Desktop\\Code Academy\\Console Project\\Project\\Project\\Files\\Users.json";
         public static List<User> ReadFromJson()
         {
-            List<User> users = new List<User>();
+            List<User> users;
             using (StreamReader sr = new StreamReader(UserPath))
             {
                 users = JsonConvert.DeserializeObject<List<User>>(sr.ReadToEnd());

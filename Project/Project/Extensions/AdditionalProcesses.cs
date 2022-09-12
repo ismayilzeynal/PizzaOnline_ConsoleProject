@@ -15,6 +15,16 @@ namespace Project.Extensions
             }
         }
 
+        public static void TryFloat(out float choise)
+        {
+            while (!Single.TryParse(Console.ReadLine(), out choise))
+            {
+                PEC();
+            }
+        }
+
+
+
         public static void PEC()
         {
             Console.WriteLine("Please enter correctly");
@@ -22,7 +32,7 @@ namespace Project.Extensions
 
         public static void End()
         {
-            Console.Clear();
+            // Console.Clear();
             Console.WriteLine("Thanks for using console app");
         }
 
@@ -40,7 +50,13 @@ namespace Project.Extensions
 
         public static void Exit()
         {
+            End();
             Environment.Exit(0);
+        }
+
+        public static void PrintCRUD()
+        {
+            Console.WriteLine("1) Show all \n2) Add \n3) Edit \n4) Delete \n0) Exit");
         }
     }
 }

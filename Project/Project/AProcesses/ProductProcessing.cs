@@ -8,6 +8,61 @@ namespace Project.AProcesses
 {
     static class ProductProcessing
     {
+
+        public static Pizza FindPizzaById()     // input ID in here
+        {
+            List<Pizza> pizzas = PizzasAndJson.ReadFromJson();
+            int choise;
+            do
+            {
+                AdditionalProcesses.TryInt(out choise);
+            } while (!pizzas.Exists(p => p.Id == choise));
+
+            Pizza pizza = pizzas.Find(p => p.Id == choise);
+            return pizza;
+        }
+
+        public static string EditName()
+        {
+            string PizzaName;
+            Console.WriteLine("Name: ");
+            do
+            {
+                PizzaName = Console.ReadLine();
+            } while (!Validation.NameValidation(PizzaName));
+
+            return PizzaName;
+        }
+
+        public static float EditPrice()
+        {
+            float PizzaPrice;
+            Console.WriteLine("Price: ");
+            AdditionalProcesses.TryFloat(out PizzaPrice);
+            return PizzaPrice;
+        }
+
+        public static List<string> EditIngridients()
+        {
+            int IngridientCount;
+            List<string> PizzaIngridients = new List<string>();
+            Console.WriteLine("Cont of Ingridients");
+            AdditionalProcesses.TryInt(out IngridientCount);
+
+            
+            for (int i = 0; i < IngridientCount; i++)
+            {
+                Console.WriteLine($"Ingridient {i+1}: ");
+                string Ingridient;
+                do
+                {
+                    Ingridient = Console.ReadLine();
+                } while (!Validation.NameValidation(Ingridient));
+                PizzaIngridients.Add(Ingridient);
+            }
+            return PizzaIngridients;
+        }
+
         public static void PrintPizzas()
         {
             List<Pizza> pizzas = PizzasAndJson.ReadFromJson();
@@ -16,6 +71,7 @@ namespace Project.AProcesses
                 Console.WriteLine($"- {pizza.Id}. {pizza.Name}");
             }
         }
+
 
         public static void ProductsMenu()
         {
@@ -44,7 +100,7 @@ namespace Project.AProcesses
         IngridientsLabel:
             char choise = '-';
             int count;
-            Console.Clear();
+            // Console.Clear();
             Console.WriteLine("S) Add to cart \nG) Back \nE) Exit \n");
 
             foreach (string ingr in p.Ingridients)
@@ -70,11 +126,8 @@ namespace Project.AProcesses
                 return 0;
             else if (Char.ToLower(choise) == 'e')
                 AdditionalProcesses.Exit();
-
             return 0;
         }
-
-
 
     }
 }

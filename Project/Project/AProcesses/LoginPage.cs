@@ -16,7 +16,7 @@ namespace Project.Models
 
             while (choise < 0 || choise > 2)
             {
-                Console.Clear();
+                // Console.Clear();
                 Console.WriteLine("1) Login \n2) Register \n0) Exit");
                 AdditionalProcesses.TryInt(out choise);
             }
@@ -26,7 +26,7 @@ namespace Project.Models
         static internal User Login()
         {
         LoginLabel:
-            Console.Clear();
+            // Console.Clear();
             User u = null;
             int choise = -1;
             Console.Write("Username: ");    string Username = Console.ReadLine();
@@ -41,11 +41,11 @@ namespace Project.Models
             }
             else
             {
-                Console.Clear();
+                // Console.Clear();
                 Console.WriteLine("Invalid username or password\n");
                 while (choise < 0 || choise > 2)
                 {
-                    Console.Clear();
+                    // Console.Clear();
                     Console.WriteLine("1) Try again \n2) Create new account \n0) Exit");
                     AdditionalProcesses.TryInt(out choise);
                 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Project.Extensions;
 using Project.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Project.AProcesses
         static string PizzaPath = "C:\\Users\\asus\\OneDrive\\Desktop\\Code Academy\\Console Project\\Project\\Project\\Files\\Products.json";
         public static List<Pizza> ReadFromJson()
         {
-            List<Pizza> pizzas = new List<Pizza>();
+            List<Pizza> pizzas;
             using (StreamReader sr = new StreamReader(PizzaPath))
             {
                 pizzas = JsonConvert.DeserializeObject<List<Pizza>>(sr.ReadToEnd());
@@ -24,10 +25,16 @@ namespace Project.AProcesses
         {
             List<Pizza> pizzas = ReadFromJson();
             int MaxId = 1;
-            foreach (Pizza pizza in pizzas)
+            if(pizzas!=null)
+                foreach (Pizza pizza in pizzas)
+                {
+                    if (pizza.Id > MaxId)
+                        MaxId = pizza.Id;
+                }
+            else
             {
-                if (pizza.Id > MaxId)
-                    MaxId = pizza.Id;
+                Console.WriteLine("something gone wrong");
+                AdditionalProcesses.Exit();
             }
             p.Id = MaxId + 1;
             pizzas.Add(p);
