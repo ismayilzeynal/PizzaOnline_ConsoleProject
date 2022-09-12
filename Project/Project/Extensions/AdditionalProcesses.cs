@@ -32,7 +32,7 @@ namespace Project.Extensions
 
         public static void End()
         {
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("Thanks for using console app");
         }
 

@@ -43,20 +43,17 @@ namespace Project.AProcesses
         {
             p.Count = count;
             AddToJson(p);
-            //List<Pizza> pizzas = ReadFromJson();
-            //int MaxId = 1;
-            //foreach (Pizza pizza in pizzas)
-            //{
-            //    if (pizza.Id > MaxId)
-            //        MaxId = pizza.Id;
-            //}
-            //p.Id = MaxId + 1;
-            //pizzas.Add(p);
+        }
 
-            //using (StreamWriter sw = new StreamWriter(PizzaPath))
-            //{
-            //    sw.Write(JsonConvert.SerializeObject(pizzas));
-            //}
+        public static void ClearCart()
+        {
+            List<Pizza> pizzas = new List<Pizza>();
+            List<string> ingridients = new List<string>(); ingridients.Add("chees");
+            Pizza p = new Pizza("Margarita", 0, ingridients);   p.Count = 0;
+            using (StreamWriter sw = new StreamWriter(PizzaPath))
+            {
+                sw.Write(JsonConvert.SerializeObject(pizzas));
+            }
         }
     }
 }

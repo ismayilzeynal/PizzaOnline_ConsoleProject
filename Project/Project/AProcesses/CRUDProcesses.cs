@@ -60,9 +60,14 @@ namespace Project.AProcesses
             string PizzaName;
             float PizzaPrice;
             List<string> PizzaIngridients = new List<string>();
-
+        Again:
             PizzaName = ProductProcessing.EditName();
-
+            if (Validation.IsContainPizza(PizzaName))
+            {
+                Console.WriteLine(" !This pizza already created");
+                PizzaName = "";
+                goto Again;
+            }
             PizzaPrice = ProductProcessing.EditPrice();
 
             PizzaIngridients = ProductProcessing.EditIngridients();

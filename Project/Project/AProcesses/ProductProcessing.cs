@@ -78,6 +78,7 @@ namespace Project.AProcesses
             List<Pizza> pizzas = PizzasAndJson.ReadFromJson();
             int choise = -1;
             Pizza p;
+            Console.Clear();
             Console.WriteLine("Input ID: \n");
             PrintPizzas();
         InputIdLabel:
@@ -100,12 +101,14 @@ namespace Project.AProcesses
         IngridientsLabel:
             char choise = '-';
             int count;
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("S) Add to cart \nG) Back \nE) Exit \n");
 
+            if(p!=null)
             foreach (string ingr in p.Ingridients)
                 Console.WriteLine($"- {ingr}");
-
+            else
+                Console.WriteLine("p is null");
             try
             {
                 choise = Convert.ToChar(Console.ReadLine());
@@ -121,6 +124,8 @@ namespace Project.AProcesses
                 Console.WriteLine("Enter count: ");
                 AdditionalProcesses.TryInt(out count);
                 CartProcessing.AddToJson(p, count);
+                //---------------
+
             }
             else if (Char.ToLower(choise) == 'g')
                 return 0;
@@ -129,5 +134,6 @@ namespace Project.AProcesses
             return 0;
         }
 
+        
     }
 }

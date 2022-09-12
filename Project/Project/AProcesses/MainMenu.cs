@@ -21,7 +21,7 @@ namespace Project.AProcesses
         private static int PrintForUser()
         {
             int choise = -1;
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("1) Show Pizzas \n2) Order \n0) Exit");
             AdditionalProcesses.TryInt(out choise);
             return choise;
@@ -38,9 +38,11 @@ namespace Project.AProcesses
                     break;
                 case 1:
                     ProductProcessing.ProductsMenu();
-                    goto MenuLabel;
+                    Menu(u);
+                    break;
                 case 2:
                     Order();
+                    Menu(u);
                     break;
                 case 3:
                     break;              // admində işlədəcəyik
@@ -56,7 +58,7 @@ namespace Project.AProcesses
         private static int PrintForAdmin()
         {
             int choise = -1;
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("1) Show Pizzas \n2) Order \n3) Pizzas \n4) Users \n0) Exit");
             while (choise < 0 || choise > 4)
             {
@@ -93,7 +95,16 @@ namespace Project.AProcesses
             {
                 sum += (p.Count * p.Price);
             }
-            Console.WriteLine($"{sum} AZN");
+            if (sum != 0)
+                Console.WriteLine($"{sum} AZN");
+            else
+            {
+                if (EmptyCart() == 1)
+                    return;
+                else
+                    AdditionalProcesses.Exit();
+                return;
+            }
 
         Again:
             Console.WriteLine("Contact number:");
@@ -107,6 +118,20 @@ namespace Project.AProcesses
             Console.ReadLine();
 
             Console.WriteLine("Your order has been registered");
+            CartProcessing.ClearCart();
+        }
+
+        public static int EmptyCart()
+        {
+            Console.Clear();
+            Console.WriteLine("Your cart is empty");
+            Console.WriteLine("1) Back \n0) Exit");
+            int choise = -1;
+            while (choise < 0 || choise > 1)
+            {
+                AdditionalProcesses.TryInt(out choise);
+            }
+            return choise;
         }
     }
 }

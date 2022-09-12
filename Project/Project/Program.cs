@@ -13,6 +13,8 @@ namespace Project
     {
         static void Main(string[] args)
         {
+            CartProcessing.ClearCart();
+
             int choise;
             User u=null;
             
@@ -24,23 +26,10 @@ namespace Project
             else if (choise == 0)
                 AdditionalProcesses.Exit();
             else
-                throw new AbnormalValueException();
+                throw new AbnormalValueException();     // expception vermə ehtimalı yoxdu, amma güvənlik üçün qoymuşam
 
             MainMenu.Menu(u);
-            
-
-
-
-            
-
-
-
-
-            /*-------------------------------------------------------------------------*/
-            //ExitLabel:
-            //AdditionalProcesses.End();
         }
-
     }
 
 }
